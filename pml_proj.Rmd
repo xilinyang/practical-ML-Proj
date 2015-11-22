@@ -1,0 +1,88 @@
+---
+title: "Practical Machine Learning Project"
+author: "xilin yang"
+date: "November 22, 2015"
+output: html_document
+---
+# Summary
+
+Using devices such as Jawbone Up, Nike FuelBand, and Fitbit it is now possible to collect a large amount of data about personal activity relatively inexpensively. These type of devices are part of the quantified self movement - a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. One thing that people regularly do is quantify how much of a particular activity they do, but they rarely quantify how well they do it. In this project, The goal of this project is to use data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants, to develope a machine learning based model to predict quality of activity.
+
+
+### Load library
+
+```{r}
+library(caret)
+library(kernlab)
+library(randomForest)
+
+```
+
+
+### Pre-processing of data
+
+```{r}
+#read data 
+raw_data <- read.csv("pml-training.csv", na.strings= c("NA",""," "))
+
+# clean data
+na_data <- apply(raw_data, 2, function(x) {sum(is.na(x))})
+clean_data <- raw_data[,which(na_data == 0)]
+
+# clean out irrelavent variables 
+clean_train_data <- clean_data[8:length(clean_data)]
+```
+
+### Create training set and corss validation set from data
+
+```{r}
+# create training set and cross validation set
+train <- createDataPartition(y = clean_train_data$classe, p = 0.7, list = FALSE)
+training_set <- clean_train_data[train, ]
+crossvalidation_set <- clean_train_data[-train, ]
+
+```
+
+
+### Fit a prediction model use random forest 
+```{r}
+
+# fit a RF model  
+
+model <- randomForest(classe ~ ., data = training_set)
+model
+
+```
+
+### Perform model corss validation
+```{r}
+
+# cross validation
+Crossvalidation_predict <- predict(model, crossvalidation_set)
+cm<-confusionMatrix(crossvalidation_set$classe, Crossvalidation_predict)
+cm
+
+```
+### Out of Sample Error
+ 
+
+The cross-validation of the data suggested that the out of sample error is about
+
+0.53% and the overall model accuracy is about 99.3%.
+
+
+
+
+### Perform test data prediction
+
+```{r}
+# test data prediction
+raw_test <- read.csv("pml-testing.csv", na.strings= c("NA",""," "))
+raw_test_na <- apply(raw_test, 2, function(x) {sum(is.na(x))})
+test_clean1 <- raw_test[,which(raw_test_na == 0)]
+test_clean <- test_clean1[8:length(test_clean1)]
+
+test_pred <- predict(model, test_clean)
+```
+
+ 

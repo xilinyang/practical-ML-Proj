@@ -70,7 +70,7 @@ img {
 
 <div id="summary" class="section level1">
 <h1>Summary</h1>
-<p>Using devices such as Jawbone Up, Nike FuelBand, and Fitbit it is now possible to collect a large amount of data about personal activity relatively inexpensively. These type of devices are part of the quantified self movement - a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. One thing that people regularly do is quantify how much of a particular activity they do, but they rarely quantify how well they do it. In this project, The goal of this project is to use data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants, to develope a machine learning based model to predict quality of activity.</p>
+<p>Using devices such as Jawbone Up, Nike FuelBand, and Fitbit it is now possible to collect a large amount of data about personal activity relatively inexpensively. These type of devices are part of the quantified self movement - a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. One thing that people regularly do is quantify how much of a particular activity they do, but they rarely quantify how well they do it. In this project, The goal of this project is to use data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants, to develope a machine learning based model to predict quality of activity. The model is developed using Random Forest learning and results show that for this particular problem, such algorithm demonstrated being highly acucrate.</p>
 <div id="load-library" class="section level3">
 <h3>Load library</h3>
 <pre class="r"><code>library(caret)</code></pre>
@@ -113,14 +113,14 @@ model</code></pre>
 ##                      Number of trees: 500
 ## No. of variables tried at each split: 7
 ## 
-##         OOB estimate of  error rate: 0.51%
+##         OOB estimate of  error rate: 0.56%
 ## Confusion matrix:
-##      A    B    C    D    E class.error
-## A 3900    3    2    0    1 0.001536098
-## B    7 2646    5    0    0 0.004514673
-## C    0   15 2379    2    0 0.007095159
-## D    0    0   24 2225    3 0.011989343
-## E    0    0    3    5 2517 0.003168317</code></pre>
+##      A    B    C    D    E  class.error
+## A 3903    3    0    0    0 0.0007680492
+## B   16 2636    6    0    0 0.0082768999
+## C    0   15 2378    3    0 0.0075125209
+## D    0    0   21 2228    3 0.0106571936
+## E    0    0    2    8 2515 0.0039603960</code></pre>
 </div>
 <div id="perform-model-corss-validation" class="section level3">
 <h3>Perform model corss validation</h3>
@@ -132,33 +132,33 @@ cm</code></pre>
 ## 
 ##           Reference
 ## Prediction    A    B    C    D    E
-##          A 1671    3    0    0    0
-##          B    4 1135    0    0    0
-##          C    0    2 1024    0    0
-##          D    0    0   11  953    0
-##          E    0    0    2    3 1077
+##          A 1672    2    0    0    0
+##          B    2 1133    4    0    0
+##          C    0    1 1021    4    0
+##          D    0    0    8  956    0
+##          E    0    0    0    2 1080
 ## 
 ## Overall Statistics
 ##                                           
-##                Accuracy : 0.9958          
-##                  95% CI : (0.9937, 0.9972)
-##     No Information Rate : 0.2846          
+##                Accuracy : 0.9961          
+##                  95% CI : (0.9941, 0.9975)
+##     No Information Rate : 0.2845          
 ##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
 ##                                           
-##                   Kappa : 0.9946          
+##                   Kappa : 0.9951          
 ##  Mcnemar's Test P-Value : NA              
 ## 
 ## Statistics by Class:
 ## 
 ##                      Class: A Class: B Class: C Class: D Class: E
-## Sensitivity            0.9976   0.9956   0.9875   0.9969   1.0000
-## Specificity            0.9993   0.9992   0.9996   0.9978   0.9990
-## Pos Pred Value         0.9982   0.9965   0.9981   0.9886   0.9954
-## Neg Pred Value         0.9991   0.9989   0.9973   0.9994   1.0000
-## Prevalence             0.2846   0.1937   0.1762   0.1624   0.1830
-## Detection Rate         0.2839   0.1929   0.1740   0.1619   0.1830
+## Sensitivity            0.9988   0.9974   0.9884   0.9938   1.0000
+## Specificity            0.9995   0.9987   0.9990   0.9984   0.9996
+## Pos Pred Value         0.9988   0.9947   0.9951   0.9917   0.9982
+## Neg Pred Value         0.9995   0.9994   0.9975   0.9988   1.0000
+## Prevalence             0.2845   0.1930   0.1755   0.1635   0.1835
+## Detection Rate         0.2841   0.1925   0.1735   0.1624   0.1835
 ## Detection Prevalence   0.2845   0.1935   0.1743   0.1638   0.1839
-## Balanced Accuracy      0.9984   0.9974   0.9935   0.9973   0.9995</code></pre>
+## Balanced Accuracy      0.9992   0.9980   0.9937   0.9961   0.9998</code></pre>
 </div>
 <div id="out-of-sample-error" class="section level3">
 <h3>Out of Sample Error</h3>

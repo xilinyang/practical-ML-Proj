@@ -23,8 +23,8 @@ crossvalidation_set <- clean_train_data[-train, ]
 
 # fit a RF model  
 
-#model <- train(training_set$classe ~ ., method = "rf",training_set)
-model <- randomForest(classe ~ ., data = training_set)
+model <- train(training_set$classe ~ ., method = "rf",training_set)
+
 # cross validation
 Crossvalidation_predict <- predict(model, crossvalidation_set)
 cm<-confusionMatrix(crossvalidation_set$classe, Crossvalidation_predict)
